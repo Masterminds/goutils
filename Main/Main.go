@@ -17,12 +17,13 @@ func main() {
 
 	str := "Bob Manuel is"
 
-	fmt.Println (strings.LastIndex(str[0:9+0], " "))
+	fmt.Println (strings.IndexRune(str[9:12], ' '))
+	//fmt.Println (strings.LastIndex(str[0:9+0], " "))
 	fmt.Println (strings.LastIndex(str[9:12], " "))
-	fmt.Println (strings.LastIndex(str[0:len(str)], " "))
+	//fmt.Println (strings.LastIndex(str[0:len(str)], " "))
 
 	// Wrap display
-	fmt.Println(gowordutils.Wrap("Bob Manuel Bob Manuel Bob Manuel", 10, "", false))
+	fmt.Println(gowordutils.Wrap("BobManuelBob Bob", 10, "", true))
 	//fmt.Println(gowordutils.Wrap("Bob Manuel is here and there", 9, "<b\\>", false))
 
 	
