@@ -22,23 +22,18 @@ import (
 	// "fmt"
 	"bytes"   // http://golang.org/pkg/bytes/
 	"strings" // http://golang.org/pkg/strings/
-	// "unicode" // http://golang.org/pkg/unicode/
+	"unicode" // http://golang.org/pkg/unicode/
 )
 
-///*
-func Nilly (s string) string {
 
-	if s == "" {
-		return "It was nil"
-	}
+func Wrap (str string, wrapLength int) string {
 
-	return "was not nil"
+	return WrapCustom (str, wrapLength, "", false)
+
 }
 
-// */
 
-// /*
-func Wrap (str string, wrapLength int, newLineStr string, wrapLongWords bool) string {
+func WrapCustom (str string, wrapLength int, newLineStr string, wrapLongWords bool) string {
 
 	/*
 		If columns/wrapLength = 10
@@ -88,35 +83,28 @@ func Wrap (str string, wrapLength int, newLineStr string, wrapLongWords bool) st
 			wrappedLine.WriteString(newLineStr) // wrappedLine.append(newLineStr);
 			// offset = 4 + 1 = 5
 			offset = spaceToWrapAt + 1
-			//      }
 
-			//   }
-
-		//	/*
-
-			   } else {
-			       // really long word or URL
-			       if wrapLongWords { // if (wrapLongWords) {
-			       	   end := wrapLength + offset
-			           // wrap really long word one line at a time
-			           wrappedLine.WriteString(str[offset:end]) // wrappedLine.append(str.substring(offset, wrapLength + offset));
-			           wrappedLine.WriteString(newLineStr) // wrappedLine.append(newLineStr);
-			           offset += wrapLength // offset += wrapLength;
-			       } else {
-			           // do not wrap really long word, just extend beyond limit
-			       	   end := wrapLength + offset
-			           spaceToWrapAt =  strings.IndexRune(str[end:len(str)], ' ') + end // spaceToWrapAt = str.indexOf(' ', wrapLength + offset);
-			           if spaceToWrapAt >= 0 { //if (spaceToWrapAt >= 0) {
-			               wrappedLine.WriteString(str[offset:spaceToWrapAt]) // wrappedLine.append(str.substring(offset, spaceToWrapAt));
-			               wrappedLine.WriteString(newLineStr) // wrappedLine.append(newLineStr);
-			               offset = spaceToWrapAt + 1 // offset = spaceToWrapAt + 1;
-			           } else {
-			               wrappedLine.WriteString(str[offset:len(str)]) // wrappedLine.append(str.substring(offset));
-			               offset = inputLineLength // offset = inputLineLength;
-			           }
-			       }
-		//	*/
-
+		   } else {
+		       // really long word or URL
+		       if wrapLongWords { // if (wrapLongWords) {
+		       	   end := wrapLength + offset
+		           // wrap really long word one line at a time
+		           wrappedLine.WriteString(str[offset:end]) // wrappedLine.append(str.substring(offset, wrapLength + offset));
+		           wrappedLine.WriteString(newLineStr) // wrappedLine.append(newLineStr);
+		           offset += wrapLength // offset += wrapLength;
+		       } else {
+		           // do not wrap really long word, just extend beyond limit
+		       	   end := wrapLength + offset
+		           spaceToWrapAt =  strings.IndexRune(str[end:len(str)], ' ') + end // spaceToWrapAt = str.indexOf(' ', wrapLength + offset);
+		           if spaceToWrapAt >= 0 { //if (spaceToWrapAt >= 0) {
+		               wrappedLine.WriteString(str[offset:spaceToWrapAt]) // wrappedLine.append(str.substring(offset, spaceToWrapAt));
+		               wrappedLine.WriteString(newLineStr) // wrappedLine.append(newLineStr);
+		               offset = spaceToWrapAt + 1 // offset = spaceToWrapAt + 1;
+		           } else {
+		               wrappedLine.WriteString(str[offset:len(str)]) // wrappedLine.append(str.substring(offset));
+		               offset = inputLineLength // offset = inputLineLength;
+		           }
+		       }
 		}
 	}
 
@@ -128,19 +116,57 @@ func Wrap (str string, wrapLength int, newLineStr string, wrapLongWords bool) st
 
 }
 
-// */
 
-/*
-// Sqrt returns an approximation to the square root of x.
-func Sqrt(x float64) (float64, string) {
-	z := 1.0                    // test comment 1
-	for i := 0; i < 1000; i++ { // test comment 2
-		z -= (z*z - x) / (2 * z)
+
+func Capitalize (str string, delimiters []rune) string {
+ // /*
+
+	var delimLen int
+	
+	if delimiters == nil {	// final int delimLen = delimiters == null ? -1 : delimiters.length;
+		delimLen = -1
+	} else {
+		delimLen = len(delimiters)
 	}
-	a := "okay"
-	return z, a
+
+    if str == "" || delimLen == 0 { // if (StringUtils.isEmpty(str) || delimLen == 0) {
+        return str;
+    }
+
+    buffer := []rune(str)	// final char[] buffer = str.toCharArray();
+    capitalizeNext := true	// boolean capitalizeNext = true;
+    for i := 0; i < len(buffer); i++ { // for (int i = 0; i < buffer.length; i++) {
+        ch := buffer[i]	// final char ch = buffer[i];
+        if isDelimiter(ch, delimiters) {	// if (isDelimiter(ch, delimiters)) {
+            capitalizeNext = true
+        } else if capitalizeNext {
+            buffer[i] = unicode.ToTitle(ch) // buffer[i] = Character.toTitleCase(ch);
+            capitalizeNext = false
+        }
+    }
+    return string(buffer) // return new String(buffer);
+
+
+  //      */ return "okay"
+
+
 }
 
-*/
+
+	// private function
+   	func isDelimiter(ch rune, delimiters []rune) bool {
+        if delimiters == nil {
+            return unicode.IsSpace(ch) // return Character.isWhitespace(ch);
+        }
+        for _, delimiter := range delimiters { // for (final char delimiter : delimiters) {
+            if ch == delimiter { // if (ch == delimiter) {
+                return true
+            }
+        }
+        return false;
+    }
+
+
+
 
 // cd %gopath%/src/github.com/aokoli/main
