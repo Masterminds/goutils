@@ -118,7 +118,12 @@ func WrapCustom (str string, wrapLength int, newLineStr string, wrapLongWords bo
 
 
 
-func Capitalize (str string, delimiters []rune) string {
+func Capitalize (str string) string {
+
+	return CapitalizeCustom (str, nil)
+}
+
+func CapitalizeCustom (str string, delimiters []rune) string {
  // /*
 
 	var delimLen int
@@ -153,7 +158,7 @@ func Capitalize (str string, delimiters []rune) string {
 }
 
 
-	// private function
+	// private function (lower case func name)
    	func isDelimiter(ch rune, delimiters []rune) bool {
         if delimiters == nil {
             return unicode.IsSpace(ch) // return Character.isWhitespace(ch);

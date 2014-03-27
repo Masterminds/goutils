@@ -12,7 +12,7 @@ func TestWrapNormalWord(t *testing.T) {
 
 	// const in, out = str1, str2 // TODO var vs const?
 	if x := Wrap(in, wrapLength); x != out {
-		t.Errorf("wrap(%v) = %v, want %v", in, x, out)
+		t.Errorf("Wrap(%v) = %v, want %v", in, x, out)
 	}
 }
 
@@ -24,7 +24,7 @@ func TestWrapLongWordFalse(t *testing.T) {
 	wrapLength := 10
 
 	if x := Wrap(in, wrapLength); x != out {
-		t.Errorf("wrap(%v) = %v, want %v", in, x, out)
+		t.Errorf("Wrap(%v) = %v, want %v", in, x, out)
 	}
 }
 
@@ -38,9 +38,36 @@ func TestWrapCustomLongWordTrue(t *testing.T) {
 	wrapLongWords := true
 
 	if x := WrapCustom(in, wrapLength, newLineStr, wrapLongWords); x != out {
-		t.Errorf("wrap(%v) = %v, want %v", in, x, out)
+		t.Errorf("WrapCustom(%v) = %v, want %v", in, x, out)
 	}
 }
+
+
+
+func TestCapitalize(t *testing.T) {
+
+	in := "the test.is.going.well.thank you.for inquiring"
+	out := "The Test.is.going.well.thank You.for Inquiring"
+
+	if x := Capitalize(in); x != out {
+		t.Errorf("Capitalize(%v) = %v, want %v", in, x, out)
+	}
+}
+
+
+func TestCapitalizeCustom(t *testing.T) {
+
+	in := "the test.is.going.well.thank you.for inquiring"
+	out := "The Test.Is.Going.Well.Thank You.For Inquiring"
+	delimiters := []rune{' ', '.'} 
+
+	if x := CapitalizeCustom(in, delimiters); x != out {
+		t.Errorf("Capitalize(%v) = %v, want %v", in, x, out)
+	}
+}
+
+
+
 
 /*
 func TestSqrt(t *testing.T) {

@@ -21,10 +21,10 @@ func main() {
 	r[0] = ' '
 	r[1] = '.'
 
-	delimiters := []rune{' ', 'a','b'} 
+	//delimiters := []rune{' ', 'a','b'} 
 
 
-	fmt.Println (gowordutils.Capitalize("test is going well.thank you.for Inquiring", r))
+	fmt.Println (gowordutils.CapitalizeCustom("test is going well. thank you.for Inquiring", r))
 	//fmt.Println (strings.IndexRune(str[9:12], ' '))
 	//fmt.Println (strings.LastIndex(str[9:12], " "))
 	//fmt.Println (strings.LastIndex(str[0:len(str)], " "))
