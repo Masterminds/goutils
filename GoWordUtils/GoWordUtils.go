@@ -118,12 +118,12 @@ func WrapCustom (str string, wrapLength int, newLineStr string, wrapLongWords bo
 
 
 
-func Capitalize (str string) string {
+func capitalize (str string) string {
 
-	return CapitalizeCustom (str, nil)
+	return capitalizeCustom (str, nil)
 }
 
-func CapitalizeCustom (str string, delimiters []rune) string {
+func capitalizeCustom (str string, delimiters []rune) string {
  // /*
 
 	var delimLen int
@@ -172,6 +172,39 @@ func CapitalizeCustom (str string, delimiters []rune) string {
     }
 
 
+func capitalizeFully (str string) string 
+{
+  return capitalizeFullyCustom (str, nil)
+}
+
+func capitalizeFullyCustom (str string, delimiters []rune) string 
+{
+  var delimLen int
+  
+	if delimiters == nil 
+	  delimLen = -1
+	else
+		delimLen = len(delimiters)
+		
+	if str == "" || delimLen == 0
+    return str;
+
+  buffer := []rune(str)
+  capitalizeNext := true
+  
+  for i := 0; i < len(buffer); i++ 
+  {
+    ch := buffer[i]
+    
+    if isDelimiter(ch, delimiters)
+      capitalizeNext = true
+    else if capitalizeNext
+      buffer[i] = unicode.ToTitle(ch)
+      capitalizeNext = true
+  }
+    
+  return string(buffer)
+}
 
 
 // cd %gopath%/src/github.com/aokoli/main
