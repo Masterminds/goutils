@@ -118,13 +118,12 @@ func WrapCustom (str string, wrapLength int, newLineStr string, wrapLongWords bo
 
 
 
-func capitalize (str string) string {
+func Capitalize (str string) string {
 
-	return capitalizeCustom (str, nil)
+	return CapitalizeCustom (str, nil)
 }
 
-func capitalizeCustom (str string, delimiters []rune) string {
- // /*
+func CapitalizeCustom (str string, delimiters []rune) string {
 
 	var delimLen int
 	
@@ -152,59 +151,49 @@ func capitalizeCustom (str string, delimiters []rune) string {
     return string(buffer) // return new String(buffer);
 
 
-  //      */ return "okay"
-
-
 }
 
 
-	// private function (lower case func name)
-   	func isDelimiter(ch rune, delimiters []rune) bool {
-        if delimiters == nil {
-            return unicode.IsSpace(ch) // return Character.isWhitespace(ch);
-        }
-        for _, delimiter := range delimiters { // for (final char delimiter : delimiters) {
-            if ch == delimiter { // if (ch == delimiter) {
-                return true
-            }
-        }
-        return false;
+
+// private function (lower case func name)
+func isDelimiter(ch rune, delimiters []rune) bool {
+    if delimiters == nil {
+        return unicode.IsSpace(ch) // return Character.isWhitespace(ch);
     }
-
-
-func capitalizeFully (str string) string 
-{
-  return capitalizeFullyCustom (str, nil)
+    for _, delimiter := range delimiters { // for (final char delimiter : delimiters) {
+        if ch == delimiter { // if (ch == delimiter) {
+            return true
+        }
+    }
+    return false;
 }
 
-func capitalizeFullyCustom (str string, delimiters []rune) string 
-{
-  var delimLen int
-  
-	if delimiters == nil 
+
+func CapitalizeFully (str string) string  {
+
+  return CapitalizeFullyCustom (str, nil)
+
+}
+
+
+
+
+func CapitalizeFullyCustom (str string, delimiters []rune) string {
+
+    var delimLen int
+
+    if delimiters == nil {
 	  delimLen = -1
-	else
+	} else  {
 		delimLen = len(delimiters)
-		
-	if str == "" || delimLen == 0
-    return str;
+	}
 
-  buffer := []rune(str)
-  capitalizeNext := true
-  
-  for i := 0; i < len(buffer); i++ 
-  {
-    ch := buffer[i]
-    
-    if isDelimiter(ch, delimiters)
-      capitalizeNext = true
-    else if capitalizeNext
-      buffer[i] = unicode.ToTitle(ch)
-      capitalizeNext = true
-  }
-    
-  return string(buffer)
+
+    if str == "" || delimLen == 0 {
+        return str;
+    }
+    str = strings.ToLower(str) // str.toLowerCase();
+    return CapitalizeCustom(str, delimiters);
 }
 
 
-// cd %gopath%/src/github.com/aokoli/main

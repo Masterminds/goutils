@@ -24,7 +24,11 @@ func main() {
 	//delimiters := []rune{' ', 'a','b'} 
 
 
-	fmt.Println (gowordutils.CapitalizeCustom("test is going well. thank you.for Inquiring", r))
+	fmt.Println (gowordutils.CapitalizeCustom("tEsT iS goiNG wELL. tHaNk yOU.for InqUIrING", r))
+	fmt.Println (gowordutils.CapitalizeFullyCustom("tEsT iS goiNG wELL. tHaNk yOU.for InqUIrING", r))
+
+	// fmt.Println (gowordutils.CapitalizeFullyCustom("test is going well. thank you.for Inquiring", r))
+
 	//fmt.Println (strings.IndexRune(str[9:12], ' '))
 	//fmt.Println (strings.LastIndex(str[9:12], " "))
 	//fmt.Println (strings.LastIndex(str[0:len(str)], " "))
@@ -89,3 +93,13 @@ func main() {
     // fmt.Printf("Test print = %v, %v\n", "somto", 1) 
     // fmt.Println("This " + "That" + "\u00E4")   
 }
+
+
+
+ func doStuffWithString(stringParam string) {
+	    if stringParam == "sv" {
+	        fmt.Println ("does equal sv!")
+	    } else {
+	    	fmt.Println ("doesn't equal!")
+	    }
+	}

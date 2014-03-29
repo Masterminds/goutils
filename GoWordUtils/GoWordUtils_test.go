@@ -46,8 +46,8 @@ func TestWrapCustomLongWordTrue(t *testing.T) {
 
 func TestCapitalize(t *testing.T) {
 
-	in := "the test.is.going.well.thank you.for inquiring"
-	out := "The Test.is.going.well.thank You.for Inquiring"
+	in := "tEsT iS goiNG wELL.tHaNk.yOU.for inqUIrING" //"the test.is.going.well.thank you.for inquiring"
+	out := "TEsT IS GoiNG WELL.tHaNk.yOU.for InqUIrING" // "The Test.is.going.well.thank You.for Inquiring"
 
 	if x := Capitalize(in); x != out {
 		t.Errorf("Capitalize(%v) = %v, want %v", in, x, out)
@@ -57,11 +57,35 @@ func TestCapitalize(t *testing.T) {
 
 func TestCapitalizeCustom(t *testing.T) {
 
-	in := "the test.is.going.well.thank you.for inquiring"
-	out := "The Test.Is.Going.Well.Thank You.For Inquiring"
+	in := "tEsT iS goiNG wELL.tHaNk.yOU.for inqUIrING"// "the test.is.going.well.thank you.for inquiring"
+	out := "TEsT IS GoiNG WELL.THaNk.YOU.For InqUIrING"	// "The Test.Is.Going.Well.Thank You.For Inquiring"
 	delimiters := []rune{' ', '.'} 
 
 	if x := CapitalizeCustom(in, delimiters); x != out {
+		t.Errorf("Capitalize(%v) = %v, want %v", in, x, out)
+	}
+}
+
+
+
+func TestCapitalizeFully(t *testing.T) {
+
+	in := "tEsT iS goiNG wELL.tHaNk.yOU.for inqUIrING" 
+	out := "Test Is Going Well.thank.you.for Inquiring" 
+
+	if x := CapitalizeFully(in); x != out {
+		t.Errorf("Capitalize(%v) = %v, want %v", in, x, out)
+	}
+}
+
+
+func TestCapitalizeFullyCustom(t *testing.T) {
+
+	in := "tEsT iS goiNG wELL.tHaNk.yOU.for inqUIrING"
+	out := "Test Is Going Well.Thank.You.For Inquiring"	
+	delimiters := []rune{' ', '.'} 
+
+	if x := CapitalizeFullyCustom(in, delimiters); x != out {
 		t.Errorf("Capitalize(%v) = %v, want %v", in, x, out)
 	}
 }
