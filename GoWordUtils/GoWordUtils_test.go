@@ -13,13 +13,12 @@ func ExampleCapitalizeFullyCustom_nas() {
 
 	fmt.Println (CapitalizeFullyCustom(in, delimiters))
 	// Output: 
-	// Test Is Going Well.Thank.You.For Inquiring
+	// Test Is Going Well.Thank.You.For
 }
 
 func ExampleCapitalizeFully() {
 
 	in := "tEsT iS goiNG wELL.tHaNk.yOU.for inqUIrING"
-	out := "Test Is Going Well.Thank.You.For Inquiring"	
 	delimiters := []rune{' ', '.'} 
 
 	fmt.Println (CapitalizeFullyCustom(in, delimiters))
@@ -28,13 +27,11 @@ func ExampleCapitalizeFully() {
 }
 
 
-func Okay() {
-
-}
 
 
 
-/*
+
+
 func TestWrapNormalWord(t *testing.T) {
 
 	in := "Bob Manuel Bob Manuel"
@@ -120,5 +117,5 @@ func TestCapitalizeFullyCustom(t *testing.T) {
 		t.Errorf("Capitalize(%v) = %v, want %v", in, x, out)
 	}
 }
-*/
+
 
