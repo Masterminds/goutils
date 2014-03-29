@@ -4,6 +4,37 @@ import "testing"
 
 // go test github.com/aokoli/gowordutils
 
+
+func ExampleCapitalizeFullyCustom_nas() {
+
+	in := "tEsT iS goiNG wELL.tHaNk.yOU.for inqUIrING"
+	out := "Test Is Going Well.Thank.You.For Inquiring"	
+	delimiters := []rune{' ', '.'} 
+
+	fmt.Println (CapitalizeFullyCustom(in, delimiters))
+	// Output: 
+	// Test Is Going Well.Thank.You.For Inquiring
+}
+
+func ExampleCapitalizeFully() {
+
+	in := "tEsT iS goiNG wELL.tHaNk.yOU.for inqUIrING"
+	out := "Test Is Going Well.Thank.You.For Inquiring"	
+	delimiters := []rune{' ', '.'} 
+
+	fmt.Println (CapitalizeFullyCustom(in, delimiters))
+	// Output: 
+	// Test Is Going Well.Thank.You.For Inquiring
+}
+
+
+func Okay() {
+
+}
+
+
+
+/*
 func TestWrapNormalWord(t *testing.T) {
 
 	in := "Bob Manuel Bob Manuel"
@@ -89,15 +120,5 @@ func TestCapitalizeFullyCustom(t *testing.T) {
 		t.Errorf("Capitalize(%v) = %v, want %v", in, x, out)
 	}
 }
-
-
-
-
-/*
-func TestSqrt(t *testing.T) {
-	const in, out = 4, 2
-	if x := Sqrt(in); x != out {
-		t.Errorf("Sqrt(%v) = %v, want %v", in, x, out)
-	}
-}
 */
+
