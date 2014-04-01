@@ -1,20 +1,15 @@
-package gowordutils
+package wordutils
 
-import "testing"
+import (
+"testing"
+"fmt"
 
-// go test github.com/aokoli/gowordutils
+)
 
+// Markdown for Example Documentation link: [![GoDoc](https://godoc.org/github.com/aokoli/GoWordUtils?status.png)](https://godoc.org/github.com/aokoli/GoWordUtils)
 
-func ExampleCapitalizeFullyCustom_nas() {
+// EXAMPLES
 
-	in := "tEsT iS goiNG wELL.tHaNk.yOU.for inqUIrING"
-	out := "Test Is Going Well.Thank.You.For Inquiring"	
-	delimiters := []rune{' ', '.'} 
-
-	fmt.Println (CapitalizeFullyCustom(in, delimiters))
-	// Output: 
-	// Test Is Going Well.Thank.You.For
-}
 
 func ExampleCapitalizeFully() {
 
@@ -30,7 +25,7 @@ func ExampleCapitalizeFully() {
 
 
 
-
+// TESTS
 
 func TestWrapNormalWord(t *testing.T) {
 

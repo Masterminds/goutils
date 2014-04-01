@@ -14,9 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-// Package gowordutils is a Golang implementation of the WordUtils class of
+// Package wordutils is a Golang implementation of the WordUtils class of
 // Apache Commons, located within the package org.apache.commons.lang3.text
-package gowordutils
+package wordutils
 
 import (
 	// "fmt"

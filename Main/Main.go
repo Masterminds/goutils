@@ -6,12 +6,12 @@ import (
 	// "bytes"  // http://golang.org/pkg/bytes/
 	"unicode" // http://golang.org/pkg/unicode/
 
-	"github.com/aokoli/gowordutils"
+	"github.com/aokoli/wordutils"
 )
 
 var _ = strings.ToUpper("debug")
 var _ = unicode.IsPrint('4')
-// var _ = gowordutils.Nilly("debug")
+// var _ = wordutils.Nilly("debug")
 
 func main() {
 
@@ -24,18 +24,18 @@ func main() {
 	//delimiters := []rune{' ', 'a','b'} 
 
 
-	fmt.Println (gowordutils.CapitalizeCustom("tEsT iS goiNG wELL. tHaNk yOU.for InqUIrING", r))
-	fmt.Println (gowordutils.CapitalizeFullyCustom("tEsT iS goiNG wELL. tHaNk yOU.for InqUIrING", r))
+	fmt.Println (wordutils.CapitalizeCustom("tEsT iS goiNG wELL. tHaNk yOU.for InqUIrING", r))
+	fmt.Println (wordutils.CapitalizeFullyCustom("tEsT iS goiNG wELL. tHaNk yOU.for InqUIrING", r))
 
-	// fmt.Println (gowordutils.CapitalizeFullyCustom("test is going well. thank you.for Inquiring", r))
+	// fmt.Println (wordutils.CapitalizeFullyCustom("test is going well. thank you.for Inquiring", r))
 
 	//fmt.Println (strings.IndexRune(str[9:12], ' '))
 	//fmt.Println (strings.LastIndex(str[9:12], " "))
 	//fmt.Println (strings.LastIndex(str[0:len(str)], " "))
 
 	// Wrap display
-	//fmt.Println(gowordutils.Wrap("Bob Manuel is my test text. I am trying to see how this thing works properly. If it works, that will be very great", 25))
-	//fmt.Println(gowordutils.Wrap("Bob Manuel is here and there", 9, "<b\\>", false))
+	//fmt.Println(wordutils.Wrap("Bob Manuel is my test text. I am trying to see how this thing works properly. If it works, that will be very great", 25))
+	//fmt.Println(wordutils.Wrap("Bob Manuel is here and there", 9, "<b\\>", false))
 
 	
 
@@ -87,7 +87,7 @@ func main() {
 
 
 
-	// a, b := gowordutils.Sqrt(5)
+	// a, b := wordutils.Sqrt(5)
 	// fmt.Printf("Here is a: %v\n", a)
 	// fmt.Printf("Here is b: %v\n", b)
     // fmt.Printf("Test print = %v, %v\n", "somto", 1) 
