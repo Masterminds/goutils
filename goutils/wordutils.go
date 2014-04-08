@@ -14,16 +14,15 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-// Package wordutils provides utility functions to manipulate strings in various ways.
-// It is a Go implementation of the WordUtils library of Apache Commons 
-// (located within the package org.apache.commons.lang3.text).
-package wordutils
+// Package goutils provides utility functions to manipulate strings in various ways.
+package goutils
 
 import (
 	"bytes"   
 	"strings"
 	"unicode" 
 )
+
 
 /*
 Wrap wraps a single line of text, identifying words by ' '.
@@ -243,12 +242,13 @@ func Uncapitalize (str string, delimiters ...rune) string {
 /*
 SwapCase swaps the case of a String using a word based algorithm.
 
-Upper case character converts to Lower case 
-Title case character converts to Lower case 
-Lower case character after Whitespace or at start converts to Title case 
-Other Lower case character converts to Upper case 
-Whitespace is defined by unicode.IsSpacea(char).
+Conversion algorithm:
 
+    Upper case character converts to Lower case 
+    Title case character converts to Lower case 
+    Lower case character after Whitespace or at start converts to Title case 
+    Other Lower case character converts to Upper case 
+    Whitespace is defined by unicode.IsSpace(char).
  
 Parameters:
     str - the string to swap case
