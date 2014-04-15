@@ -3,7 +3,7 @@ GoUtils
 
 GoUtils provides users with utility functions to manipulate strings in various ways. It is a Go implementation of the 
 string manipulation libraries of Java Apache Commons. GoUtils includes the following Java Apache Commons libraries:
-* WordUtils	
+* WordUtils    
 * RandomStringUtils  
 
 ## Installation
@@ -19,7 +19,7 @@ GoUtils doc is available here: [![GoDoc](https://godoc.org/github.com/aokoli/GoU
 
 
 ## Usage
-The code snippet below shows an example on how to use a library within GoUtils. In this instance, and the function is the `Initials` function located within the `wordutils.go` library file.
+The code snippets below show examples of how to use GoUtils. Some functions return errors while others do not. The first instance below, which does not return an error, is the `Initials` function located within the `wordutils.go` library file.
 
     package main
     
@@ -31,9 +31,18 @@ The code snippet below shows an example on how to use a library within GoUtils. 
     func main() {
     	// EXAMPLE 1: A goutils function which returns no errors
         fmt.Println (goutils.Initials("John Doe Foo")) // Prints out "JDF"
+    }
+Some functions return errors mainly due to illegal arguements used as parameters. The code example below illustrates how to deal with function that returns an error. In this instance, and the function is the `Random` function located within the `randomstringutils.go` library file.
+    package main
+    
+    import (
+        "fmt"
+        "github.com/aokoli/goutils"
+    )
+    
+    func main() {
 
         // EXAMPLE 2: A goutils function which returns an error
-        // Intialize two variables, one for the expected string, and one for the potential error
         rand1, err1 := goutils.Random (-1, 0, 0, true, true)  
 
         if err1 != nil { 
@@ -41,9 +50,7 @@ The code snippet below shows an example on how to use a library within GoUtils. 
 		} else {
 			fmt.Println(rand1) 
 		}
-
     }
-
 
 ## License
 GoUtils is licensed under the Apache License, Version 2.0. Please check the LICENSE.txt file or visit http://www.apache.org/licenses/LICENSE-2.0 for a copy of the license. 

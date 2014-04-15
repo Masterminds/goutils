@@ -46,7 +46,7 @@ Leading spaces on a new line are stripped. Trailing spaces are not stripped.
 
 Parameters:
     str - the string to be word wrapped
-    wrapLength - the column (a column can fit only one character) to wrap the words at, less than 1 is treated as 1
+    wrapLength - the column number (a column can fit only one character) to wrap the words at, less than 1 is treated as 1
     newLineStr - the string to insert for a new line, "" uses '\n'
     wrapLongWords - true if long words (such as URLs) should be wrapped
 
@@ -81,21 +81,21 @@ func WrapCustom (str string, wrapLength int, newLineStr string, wrapLongWords bo
 		spaceToWrapAt := strings.LastIndex(str[offset:end], " ") + offset 
 
 		if spaceToWrapAt >= offset { 
-			// normal case
+			// normal word (not longer than wrapLength)
 			wrappedLine.WriteString(str[offset:spaceToWrapAt]) 
 			wrappedLine.WriteString(newLineStr) 
 			offset = spaceToWrapAt + 1
 
 		   } else {
-		       // really long word or URL
+		       // long word or URL
 		       if wrapLongWords { 
 		       	   end := wrapLength + offset
-		           // wrap really long word one line at a time
+		           // long words are wrapped one line at a time
 		           wrappedLine.WriteString(str[offset:end]) 
 		           wrappedLine.WriteString(newLineStr)
 		           offset += wrapLength 
 		       } else {
-		           // do not wrap really long word, just extend beyond limit
+		           // long words aren't wrapped, just extended beyond limit
 		       	   end := wrapLength + offset
 		           spaceToWrapAt =  strings.IndexRune(str[end:len(str)], ' ') + end 
 		           if spaceToWrapAt >= 0 {
@@ -110,7 +110,6 @@ func WrapCustom (str string, wrapLength int, newLineStr string, wrapLongWords bo
 		}
 	}
 
-	// Whatever is left in line is short enough to just pass through
 	wrappedLine.WriteString(str[offset:len(str)]) 
 
 	return wrappedLine.String() 
