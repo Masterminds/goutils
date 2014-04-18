@@ -121,7 +121,7 @@ func WrapCustom (str string, wrapLength int, newLineStr string, wrapLongWords bo
 Capitalize capitalizes all the delimiter separated words in a string. Only the first letter of each word is changed. 
 To convert the rest of each word to lowercase at the same time, use CapitalizeFully(str string, delimiters ...rune).
 The delimiters represent a set of characters understood to separate words. The first string character 
-and the first non-delimiter character after a delimiter will be capitalized. A "" input String returns "". 
+and the first non-delimiter character after a delimiter will be capitalized. A "" input string returns "". 
 Capitalization uses the Unicode title case, normally equivalent to upper case.
 
 Parameters:
@@ -163,7 +163,7 @@ func Capitalize (str string, delimiters ...rune) string {
 
 
 /*
-CapitalizeFully converts all the delimiter separated words in a String into capitalized words, that is each word is made up of a 
+CapitalizeFully converts all the delimiter separated words in a string into capitalized words, that is each word is made up of a 
 titlecase character and then a series of lowercase characters. The delimiters represent a set of characters understood 
 to separate words. The first string character and the first non-delimiter character after a delimiter will be capitalized. 
 Capitalization uses the Unicode title case, normally equivalent to upper case.
@@ -239,7 +239,7 @@ func Uncapitalize (str string, delimiters ...rune) string {
 
 
 /*
-SwapCase swaps the case of a String using a word based algorithm.
+SwapCase swaps the case of a string using a word based algorithm.
 
 Conversion algorithm:
 
@@ -313,7 +313,7 @@ func Initials(str string, delimiters ...rune) string {
             if isDelimiter(ch, delimiters...) {	
                 lastWasGap = true
             } else if lastWasGap {
-            	buf.WriteString(string(ch))
+            	buf.WriteRune(ch)
                 lastWasGap = false
             } 
         }

@@ -227,7 +227,7 @@ func RandomSeed (count int, start int, end int, letters bool, numbers bool, char
 			ch = chars[random.Intn(gap) + start]
         }
 
-	if letters && unicode.IsLetter(ch) || numbers && unicode.IsDigit(ch) || !letters && !numbers { // TODO Check IsNumber
+	if letters && unicode.IsLetter(ch) || numbers && unicode.IsDigit(ch) || !letters && !numbers { 
             if ch >= 56320 && ch <= 57343 { // low surrogate range
                 if count == 0 {
                    count++
@@ -236,7 +236,7 @@ func RandomSeed (count int, start int, end int, letters bool, numbers bool, char
                     buffer[count] = ch  
                     count-- 
                     // Insert high surrogate
-                    buffer[count] = rune(55296 + random.Intn(128)) // (Why 128? Alphanumeric limit?) 
+                    buffer[count] = rune(55296 + random.Intn(128)) 
                 }
             } else if ch >= 55296 && ch <= 56191 { // High surrogates range (Partial) 
                 if count == 0 {

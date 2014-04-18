@@ -33,6 +33,29 @@ more Java Apache Commons libraries.
 
 func main() {
 
+	// ******************** STRINGUTILS *******************
+	ab, _ := goutils.Abbreviate("abcdefg", 6)
+	ab2, _ := goutils.Abbreviate("", 6)
+	fmt.Println(ab)
+	fmt.Println(ab2)
+	fmt.Println(goutils.IndexOf("abcdaf","a",0))
+
+	/*
+
+	StringUtils.abbreviate(null, *)      = null
+ StringUtils.abbreviate("", 4)        = ""
+ StringUtils.abbreviate("abcdefg", 6) = "abc..."
+ StringUtils.abbreviate("abcdefg", 7) = "abcdefg"
+ StringUtils.abbreviate("abcdefg", 8) = "abcdefg"
+ StringUtils.abbreviate("abcdefg", 4) = "a..."
+ StringUtils.abbreviate("abcdefg", 3) = IllegalArgumentException
+
+
+	*/
+
+
+	// ******************** RANDOMSTRINGUTILS *******************
+
 	chars := []rune {'1','2','9'}
 
 	//fmt.Println(math.MaxInt32)
@@ -48,10 +71,6 @@ func main() {
 	rand6, err6 := goutils.Random (5, 0, 0, true, true, chars...)
 
 	rand7, err7 := goutils.Random (5, 0, 0, true, true)
-	// , err7 := goutils.Random (5, 0, 0, false, false)
-
-
-	// start and end = 0
 	rand8, err8 := goutils.RandomAlphaNumericCustom (20, false, true)
 
 	rand9, err9 := goutils.RandomAlphaNumeric (5)
