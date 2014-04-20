@@ -157,3 +157,15 @@ func IsBlank(str string) bool {
         }
     return true
 }
+
+func IndexOf(str string, sub string, start int) int {
+    partialIndex := strings.Index(str[start:len(str)], sub) 
+    if partialIndex == -1 {
+        return -1
+    }
+    return partialIndex + start
+}
+
+func IsEmpty(str string) bool {
+    return str == ""
+}
