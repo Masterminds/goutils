@@ -14,7 +14,37 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-// Package goutils provides utility functions to manipulate strings in various ways.
+/* 
+Package goutils provides utility functions to manipulate strings in various ways.
+The code snippets below show examples of how to use goutils. Some functions return 
+errors while others do not, so usage would vary as a result.
+
+Example:
+
+    package main
+
+    import (
+        "fmt"
+        "github.com/aokoli/goutils"
+    )
+
+    func main() {
+
+        // EXAMPLE 1: A goutils function which returns no errors
+        fmt.Println (goutils.Initials("John Doe Foo")) // Prints out "JDF"
+
+
+
+        // EXAMPLE 2: A goutils function which returns an error
+        rand1, err1 := goutils.Random (-1, 0, 0, true, true)  
+
+        if err1 != nil { 
+            fmt.Println(err1) // Prints out error message because -1 was entered as the first parameter in goutils.Random(...)
+        } else {
+            fmt.Println(rand1) 
+        }
+    }
+*/
 package goutils
 
 import (
@@ -59,7 +89,7 @@ func WrapCustom (str string, wrapLength int, newLineStr string, wrapLongWords bo
 		return ""
 	}
 	if newLineStr == "" {
-		newLineStr = "\n" // TODO Assumes "\n" is seperator. Explore SystemUtils.LINE_SEPARATOR;
+		newLineStr = "\n" // TODO Assumes "\n" is seperator. Explore SystemUtils.LINE_SEPARATOR from Apache Commons 
 	}
 	if wrapLength < 1 {
 		wrapLength = 1
@@ -199,7 +229,6 @@ Uncapitalize uncapitalizes all the whitespace separated words in a string. Only 
 The delimiters represent a set of characters understood to separate words. The first string character and the first non-delimiter 
 character after a delimiter will be uncapitalized. Whitespace is defined by unicode.IsSpacea(char). 
 
-
 Parameters:
     str - the string to uncapitalize fully
     delimiters - set of characters to determine capitalization, exclusion of this parameter means whitespace would be delimeter
@@ -233,8 +262,6 @@ func Uncapitalize (str string, delimiters ...rune) string {
         }
     }
     return string(buffer) 
-
-
 }
 
 

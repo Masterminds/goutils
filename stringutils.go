@@ -21,15 +21,53 @@ import (
 	"fmt"
 	"unicode" 
 	"bytes"
-	//"strings"
+	"strings"
 )
 
+// Typically returned by functions where a searched item cannot be found
+const INDEX_NOT_FOUND = -1 
 
 
+/*
+Abbreviate abbreviates a string using ellipses. This will turn "Now is the time for all good men" into "Now is the time for..."
+
+Specifically: 
+
+    - If str is less than maxWidth characters long, return it. 
+    - Else abbreviate it to (str[0:maxWidth - 3] + "..."). 
+    - If maxWidth is less than 4, return an illegal argument error. 
+    - In no case will it return a string of length greater than maxWidth. 
+
+Parameters:
+    str -  the string to check
+    maxWidth - maximum length of result string, must be at least 4
+
+Returns:
+    string - abbreviated String
+    error - if the width is too small
+
+*/
 func Abbreviate (str string, maxWidth int) (string, error) {
 	return AbbreviateFull(str, 0, maxWidth)
 }
 
+
+/*
+AbbreviateFull abbreviates a string using ellipses. This will turn "Now is the time for all good men" into "...is the time for..."
+This function works like Abbreviate(string, int), but allows you to specify a "left edge" offset. Note that this left edge is not 
+necessarily going to be the leftmost character in the result, or the first character following the ellipses, but it will appear 
+somewhere in the result.
+In no case will it return a String of length greater than maxWidth.
+
+Parameters:
+    str - the String to check
+    offset - left edge of source string
+    maxWidth - maximum length of result string, must be at least 4
+
+Returns:
+    string - abbreviated String
+    error - if the width is too small
+*/
 func AbbreviateFull (str string, offset int, maxWidth int) (string, error) {
     if str == "" {
         return "", nil
@@ -63,8 +101,16 @@ func AbbreviateFull (str string, offset int, maxWidth int) (string, error) {
 }
 
 
+/*
+DeleteWhiteSpace deletes all whitespaces from a string as defined by unicode.IsSpace(rune).
+It returns the string without whitespaces.
 
+Parameter:
+    str - the String to delete whitespace from, may be null
 
+Returns:
+    the string without whitespaces
+*/
 func DeleteWhiteSpace(str string) string {
         if str == "" {
             return str
@@ -87,50 +133,37 @@ func DeleteWhiteSpace(str string) string {
 
 
 /*
-public static int indexOfDifference(final CharSequence cs1, final CharSequence cs2) {
-    if (cs1 == cs2) {
-        return INDEX_NOT_FOUND;
+IndexOfDifference compares two strings, and returns the index at which the strings begin to differ.
+
+Parameters:
+    str1 - the first string
+    str2 - the second string
+
+Returns:
+    the index where str1 and str2 begin to differ; -1 if they are equal
+*/
+func IndexOfDifference(str1 string, str2 string) int {
+    if str1 == str2 {
+        return INDEX_NOT_FOUND
     }
-    if (cs1 == null || cs2 == null) {
-        return 0;
+    if IsEmpty(str1) || IsEmpty(str2) {
+        return 0
     }
-    int i;
-    for (i = 0; i < cs1.length() && i < cs2.length(); ++i) {
-        if (cs1.charAt(i) != cs2.charAt(i)) {
-            break;
+    var i int;
+    for i = 0; i < len(str1) && i < len(str2); i++ {
+        if rune(str1[i]) != rune(str2[i]) {
+            break
         }
     }
-    if (i < cs2.length() || i < cs1.length()) {
-        return i;
+    if i < len(str2) || i < len(str1) {
+        return i
     }
-    return INDEX_NOT_FOUND;
+    return INDEX_NOT_FOUND
 }
 
 
 
-
-
- public static String deleteWhitespace(final String str) {
-        if (isEmpty(str)) {
-            return str;
-        }
-        final int sz = str.length();
-        final char[] chs = new char[sz];
-        int count = 0;
-        for (int i = 0; i < sz; i++) {
-            if (!Character.isWhitespace(str.charAt(i))) {
-                chs[count++] = str.charAt(i);
-            }
-        }
-        if (count == sz) {
-            return str;
-        }
-        return new String(chs, 0, count);
-    }
-*/
-
 /*
-
 IsBlank checks if a string is whitespace or empty (""). Observe the following behavior:
 
     goutils.IsBlank("")        = true
@@ -145,7 +178,6 @@ Returns:
     true - if the string is whitespace or empty ("")
 */
 func IsBlank(str string) bool {
-   // return strings.TrimSpace(str) == ""
     strLen := len(str)
         if str == "" || strLen == 0 {
             return true
@@ -158,14 +190,44 @@ func IsBlank(str string) bool {
     return true
 }
 
+
+/* 
+IndexOf returns the index of the first instance of sub in str, with the search beginning from the 
+index start point specified. -1 is returned if sub is not present in str.
+
+An empty string ("") will return -1 (INDEX_NOT_FOUND). A negative start position is treated as zero. 
+A start position greater than the string length returns -1.
+
+Parameters:
+    str - the string to check
+    sub - the substring to find
+    start - the start position; negative treated as zero
+
+Returns:
+    the first index where the sub string was found  (always >= start)
+*/
 func IndexOf(str string, sub string, start int) int {
+
+    if (start < 0) {
+        start = 0
+    }
+
+    if len(str) < start {
+        return INDEX_NOT_FOUND
+    }
+
+    if IsEmpty(str) || IsEmpty(sub) {
+        return INDEX_NOT_FOUND
+    }
+
     partialIndex := strings.Index(str[start:len(str)], sub) 
     if partialIndex == -1 {
-        return -1
+        return INDEX_NOT_FOUND
     }
     return partialIndex + start
 }
 
+// IsEmpty checks if a string is empty (""). Returns true if empty, and false otherwise.
 func IsEmpty(str string) bool {
-    return str == ""
+    return len(str) == 0
 }

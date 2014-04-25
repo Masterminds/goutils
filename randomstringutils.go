@@ -25,11 +25,9 @@ import (
 	"time"
 )
 
-var _ = rand.Intn(1) 		  // To remove. For debugging
-var _ = unicode.IsLetter(' ')	  // To remove. For debugging
-var _ = time.Now().UnixNano() // To remove. For debugging
 
-var RANDOM = rand.New(rand.NewSource(time.Now().UnixNano()))   // Provides the time-based seed used to generate random #s 
+// Provides the time-based seed used to generate random #s 
+var RANDOM = rand.New(rand.NewSource(time.Now().UnixNano()))   
 
 /*
 RandomNonAlphaNumeric creates a random string whose length is the number of characters specified.
@@ -80,7 +78,7 @@ func RandomNumeric (count int) (string, error) {
 
 
 /*
-Creates a random string whose length is the number of characters specified.
+RandomAlphabetic creates a random string whose length is the number of characters specified.
 Characters will be chosen from the set of alpha-numeric characters as indicated by the arguments.
 
 Parameters:
@@ -118,8 +116,6 @@ Characters will be chosen from the set of alpha-numeric characters as indicated 
 
 Parameters:
 	count - the length of random string to create
-	start - the position in set of chars (ASCII/Unicode decimals) to start at
-	end - the position in set of chars (ASCII/Unicode decimals) to end before
 	letters - if true, generated string may include alphabetic characters
 	numbers - if true, generated string may include numeric characters
 
@@ -127,7 +123,7 @@ Returns:
 	string - the random string
 	error - an error stemming from an invalid parameter within underlying function 
 */
-func RandomAlphaNumericCustom (count int,  letters bool, numbers bool) (string, error) {
+func RandomAlphaNumericCustom (count int, letters bool, numbers bool) (string, error) {
     return Random(count, 0, 0, letters, numbers)
 }
 
@@ -139,8 +135,8 @@ instead of using an externally supplied source of randomness, it uses the intern
 
 Parameters:
 	count - the length of random string to create
-	start - the position in set of chars (ASCII/Unicode decimals) to start at
-	end - the position in set of chars (ASCII/Unicode decimals) to end before
+	start - the position in set of chars (ASCII/Unicode int) to start at
+	end - the position in set of chars (ASCII/Unicode int) to end before
 	letters - if true, generated string may include alphabetic characters
 	numbers - if true, generated string may include numeric characters
 	chars - the set of chars to choose randoms from. If nil, then it will use the set of all chars.
@@ -157,8 +153,8 @@ func Random (count int, start int, end int, letters bool, numbers bool, chars ..
 /*
 RandomSeed creates a random string based on a variety of options, using supplied source of randomness.
 If the parameters start and end are both 0, start and end are set to ' ' and 'z', the ASCII printable characters, will be used, 
-unless letters and numbers are both false, in which case, start and end are set to 0 and math.MaxInt32. 
-If set is not null, characters between start and end are chosen.
+unless letters and numbers are both false, in which case, start and end are set to 0 and math.MaxInt32, respectively. 
+If chars is not nil, characters between start and end are chosen.
 This method accepts a user-supplied *rand.Rand instance to use as a source of randomness. By seeding a single *rand.Rand instance
 with a fixed seed and using it for each call, the same random sequence of strings can be generated repeatedly and predictably.
 
@@ -195,8 +191,8 @@ func RandomSeed (count int, start int, end int, letters bool, numbers bool, char
             if !letters && !numbers {
                 end = math.MaxInt32
             } else {
-                end = 'z' + 1;
-                start = ' ';                
+                end = 'z' + 1
+                start = ' '                
             }
         }
     } else {
