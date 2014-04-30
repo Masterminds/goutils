@@ -8,7 +8,7 @@ string manipulation libraries of Java Apache Commons. GoUtils includes the follo
 * StringUtils (partial implementation)
 
 ## Installation
-If you have Go set up on your system, enter this within the command line/terminal:
+If you have Go set up on your system, from the GOPATH directory within the command line/terminal, enter this:
 
 	go get github.com/aokoli/goutils
     

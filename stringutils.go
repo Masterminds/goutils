@@ -29,9 +29,9 @@ const INDEX_NOT_FOUND = -1
 
 
 /*
-Abbreviate abbreviates a string using ellipses. This will turn "Now is the time for all good men" into "Now is the time for..."
+Abbreviate abbreviates a string using ellipses. This will turn  the string "Now is the time for all good men" into "Now is the time for..."
 
-Specifically: 
+Specifically, the algorithm is as follows: 
 
     - If str is less than maxWidth characters long, return it. 
     - Else abbreviate it to (str[0:maxWidth - 3] + "..."). 
@@ -43,9 +43,8 @@ Parameters:
     maxWidth - maximum length of result string, must be at least 4
 
 Returns:
-    string - abbreviated String
+    string - abbreviated string
     error - if the width is too small
-
 */
 func Abbreviate (str string, maxWidth int) (string, error) {
 	return AbbreviateFull(str, 0, maxWidth)
@@ -53,19 +52,19 @@ func Abbreviate (str string, maxWidth int) (string, error) {
 
 
 /*
-AbbreviateFull abbreviates a string using ellipses. This will turn "Now is the time for all good men" into "...is the time for..."
+AbbreviateFull abbreviates a string using ellipses. This will turn the string "Now is the time for all good men" into "...is the time for..."
 This function works like Abbreviate(string, int), but allows you to specify a "left edge" offset. Note that this left edge is not 
 necessarily going to be the leftmost character in the result, or the first character following the ellipses, but it will appear 
 somewhere in the result.
-In no case will it return a String of length greater than maxWidth.
+In no case will it return a string of length greater than maxWidth.
 
 Parameters:
-    str - the String to check
+    str - the string to check
     offset - left edge of source string
     maxWidth - maximum length of result string, must be at least 4
 
 Returns:
-    string - abbreviated String
+    string - abbreviated string
     error - if the width is too small
 */
 func AbbreviateFull (str string, offset int, maxWidth int) (string, error) {
@@ -106,7 +105,7 @@ DeleteWhiteSpace deletes all whitespaces from a string as defined by unicode.IsS
 It returns the string without whitespaces.
 
 Parameter:
-    str - the String to delete whitespace from, may be null
+    str - the string to delete whitespace from, may be nil
 
 Returns:
     the string without whitespaces

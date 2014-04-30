@@ -53,6 +53,8 @@ import (
 	"unicode" 
 )
 
+// VERSION indicates the current version of goutils
+const VERSION = "1.0.0"
 
 /*
 Wrap wraps a single line of text, identifying words by ' '.
@@ -227,7 +229,7 @@ func CapitalizeFully (str string, delimiters ...rune) string {
 /*
 Uncapitalize uncapitalizes all the whitespace separated words in a string. Only the first letter of each word is changed.
 The delimiters represent a set of characters understood to separate words. The first string character and the first non-delimiter 
-character after a delimiter will be uncapitalized. Whitespace is defined by unicode.IsSpacea(char). 
+character after a delimiter will be uncapitalized. Whitespace is defined by unicode.IsSpace(char). 
 
 Parameters:
     str - the string to uncapitalize fully

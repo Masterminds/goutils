@@ -38,7 +38,7 @@ Parameter:
 
 Returns:
 	string - the random string
-	error - an error stemming from an invalid parameter within underlying function
+	error - an error stemming from an invalid parameter within underlying function, RandomSeed(...)
 */
 func RandomNonAlphaNumeric (count int) (string, error) {
     return RandomAlphaNumericCustom(count, false, false)
@@ -54,7 +54,7 @@ Parameter:
 
 Returns:
 	string - the random string
-	error - an error stemming from an invalid parameter within underlying function
+	error - an error stemming from an invalid parameter within underlying function, RandomSeed(...)
 */
 func RandomAscii(count int) (string, error) {
     return Random(count, 32, 127, false, false)
@@ -70,7 +70,7 @@ Parameter:
 
 Returns:
 	string - the random string
-	error - an error stemming from an invalid parameter within underlying function
+	error - an error stemming from an invalid parameter within underlying function, RandomSeed(...)
 */
 func RandomNumeric (count int) (string, error) {
     return Random(count, 0, 0, false, true)
@@ -88,7 +88,7 @@ Parameters:
 
 Returns:
 	string - the random string
-	error - an error stemming from an invalid parameter within underlying function
+	error - an error stemming from an invalid parameter within underlying function, RandomSeed(...)
 */
 func RandomAlphabetic (count int) (string, error) {
     return Random(count, 0, 0, true, false)
@@ -104,7 +104,7 @@ Parameter:
 
 Returns:
 	string - the random string
-	error - an error stemming from an invalid parameter within underlying function
+	error - an error stemming from an invalid parameter within underlying function, RandomSeed(...)
 */
 func RandomAlphaNumeric (count int) (string, error) {
     return Random(count, 0, 0, true, true)
@@ -121,7 +121,7 @@ Parameters:
 
 Returns:
 	string - the random string
-	error - an error stemming from an invalid parameter within underlying function 
+	error - an error stemming from an invalid parameter within underlying function, RandomSeed(...) 
 */
 func RandomAlphaNumericCustom (count int, letters bool, numbers bool) (string, error) {
     return Random(count, 0, 0, letters, numbers)
@@ -143,7 +143,7 @@ Parameters:
 
 Returns:
 	string - the random string
-	error - an error stemming from invalid parameters: if count < 0; or the provided chars array is empty; or end <= start; or end > len(chars) 
+	error - an error stemming from an invalid parameter within underlying function, RandomSeed(...) 
 */
 func Random (count int, start int, end int, letters bool, numbers bool, chars ...rune) (string, error) {
 	return RandomSeed (count, start, end, letters, numbers, chars, RANDOM)
@@ -154,7 +154,7 @@ func Random (count int, start int, end int, letters bool, numbers bool, chars ..
 RandomSeed creates a random string based on a variety of options, using supplied source of randomness.
 If the parameters start and end are both 0, start and end are set to ' ' and 'z', the ASCII printable characters, will be used, 
 unless letters and numbers are both false, in which case, start and end are set to 0 and math.MaxInt32, respectively. 
-If chars is not nil, characters between start and end are chosen.
+If chars is not nil, characters stored in chars that are between start and end are chosen.
 This method accepts a user-supplied *rand.Rand instance to use as a source of randomness. By seeding a single *rand.Rand instance
 with a fixed seed and using it for each call, the same random sequence of strings can be generated repeatedly and predictably.
 
