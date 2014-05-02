@@ -60,9 +60,13 @@ Some functions return errors mainly due to illegal arguements used as parameters
 ## License
 GoUtils is licensed under the Apache License, Version 2.0. Please check the LICENSE.txt file or visit http://www.apache.org/licenses/LICENSE-2.0 for a copy of the license. 
 
+## Issue Reporting
+Make suggestions or report issues using the Git issue tracker: https://github.com/aokoli/goutils/issues
+
 ## Website
-* [GoUtils webpage](#)
+* [GoUtils webpage](http://aokoli.github.io/goutils/)
 
 ## Mailing List
-Contact [okolialex@gmail.com](mailto:okolialex@mail.com) to be added to the mailing list.
+Contact [okolialex@gmail.com](mailto:okolialex@mail.com) to be added to the mailing list. You will get updates on the 
+status of the project and the potential direction it will be heading.
 
