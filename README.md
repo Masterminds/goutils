@@ -1,6 +1,7 @@
 GoUtils
 ===========
 [![Stability: Maintenance](https://masterminds.github.io/stability/maintenance.svg)](https://masterminds.github.io/stability/maintenance.html)
+[![GoDoc](https://godoc.org/github.com/Masterminds/goutils?status.png)](https://godoc.org/github.com/Masterminds/goutils)
 
 GoUtils provides users with utility functions to manipulate strings in various ways. It is a Go implementation of some 
 string manipulation libraries of Java Apache Commons. GoUtils includes the following Java Apache Commons classes:
