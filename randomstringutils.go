@@ -20,6 +20,7 @@ import (
 	"fmt"
 	"math"
 	"math/rand"
+	"regexp"
 	"time"
 	"unicode"
 )
@@ -101,7 +102,19 @@ Returns:
 	error - an error stemming from an invalid parameter within underlying function, RandomSeed(...)
 */
 func RandomAlphaNumeric(count int) (string, error) {
-	return Random(count, 0, 0, true, true)
+
+	RandomString, err := Random(count, 0, 0, true, true)
+	if err != nil {
+		return "", fmt.Errorf("Error: %s", err)
+	}
+	match, _ := regexp.MatchString("([0-9]+)", RandomString)
+
+	for match == false {
+		RandomString, err = Random(count, 0, 0, true, true)
+		match, _ = regexp.MatchString("([0-9]+)", RandomString)
+	}
+
+	return RandomString, err
 }
 
 /*
