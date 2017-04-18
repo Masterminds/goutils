@@ -68,7 +68,4 @@ Make suggestions or report issues using the Git issue tracker: https://github.co
 ## Website
 * [GoUtils webpage](http://Masterminds.github.io/goutils/)
 
-## Mailing List
-Contact [okolialex@gmail.com](mailto:okolialex@mail.com) to be added to the mailing list. You will get updates on the 
-status of the project and the potential direction it will be heading.
 
