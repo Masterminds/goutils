@@ -21,7 +21,6 @@ import (
 	"math"
 	"math/rand"
 	"regexp"
-	"strconv"
 	"time"
 	"unicode"
 )
@@ -111,9 +110,9 @@ func RandomAlphaNumeric(count int) (string, error) {
 
 	if !match {
 		//Get the position between 0 and the length of the string-1  to insert a random number
-		position := rand.Intn(count - 1)
+		position := rand.Intn(count)
 		//Insert a random number between [0-9] in the position
-		RandomString = RandomString[:position] + strconv.Itoa(rand.Intn(9)) + RandomString[position+1:]
+		RandomString = RandomString[:position] + string('0'+rand.Intn(10)) + RandomString[position+1:]
 		return RandomString, err
 	}
 	return RandomString, err
