@@ -21,6 +21,7 @@ import (
 	"math"
 	"math/rand"
 	"regexp"
+	"strings"
 	"time"
 	"unicode"
 )
@@ -108,9 +109,12 @@ func RandomAlphaNumeric(count int) (string, error) {
 	}
 	match, _ := regexp.MatchString("([0-9]+)", RandomString)
 
-	if match == false {
+	if !match {
+		fmt.Println("I was going to generate.. ", RandomString)
 		//Get the position between 0 and the length of the string-1  to insert a random number
 		position := rand.Intn(count - 1)
+		strings.Replace(RandomString)
+
 		fmt.Println("Generated number: ", position)
 		//Insert a random number between [0-9] in the position
 		RandomString = RandomString[:position] + string(rand.Intn(9)) + RandomString[position+1:]

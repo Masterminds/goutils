@@ -2,8 +2,11 @@ package goutils
 
 import (
 	"fmt"
+	"goutils"
 	"math/rand"
+	"regexp"
 	"testing"
+	"time"
 )
 
 // ****************************** TESTS ********************************************
@@ -75,4 +78,21 @@ func ExampleRandomSeed() {
 	// 88935
 	// H_I;E
 	// 2b2ca
+}
+
+func ExampleAlphaNumericString() {
+	rand.Seed(time.Now().UTC().UnixNano())
+
+	for index := 0; index < 15; index++ {
+		testString, err := goutils.RandomAlphaNumeric(15)
+		if err != nil {
+			fmt.Println("Error generating string")
+		}
+		fmt.Println("RandomString: ", testString)
+		match, _ := regexp.MatchString("([0-9]+)", a)
+		if !match {
+			return fmt.Errorf("Error: There are some alphanumeric strings containing only letters")
+		}
+
+	}
 }
