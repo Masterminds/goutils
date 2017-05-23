@@ -102,19 +102,22 @@ Returns:
 	error - an error stemming from an invalid parameter within underlying function, RandomSeed(...)
 */
 func RandomAlphaNumeric(count int) (string, error) {
-
 	RandomString, err := Random(count, 0, 0, true, true)
 	if err != nil {
 		return "", fmt.Errorf("Error: %s", err)
 	}
 	match, _ := regexp.MatchString("([0-9]+)", RandomString)
 
-	for match == false {
-		RandomString, err = Random(count, 0, 0, true, true)
-		match, _ = regexp.MatchString("([0-9]+)", RandomString)
+	if match == false {
+		//Get the position between 0 and the length of the string-1  to insert a random number
+		position := rand.Intn(count - 1)
+		fmt.Println("Generated number: ", position)
+		//Insert a random number between [0-9] in the position
+		RandomString = RandomString[:position] + string(rand.Intn(9)) + RandomString[position+1:]
+		return RandomString, err
 	}
-
 	return RandomString, err
+
 }
 
 /*
