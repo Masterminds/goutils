@@ -106,7 +106,10 @@ func RandomAlphaNumeric(count int) (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("Error: %s", err)
 	}
-	match, _ := regexp.MatchString("([0-9]+)", RandomString)
+	match, err := regexp.MatchString("([0-9]+)", RandomString)
+	if err != nil {
+		panic(err)
+	}
 
 	if !match {
 		//Get the position between 0 and the length of the string-1  to insert a random number
