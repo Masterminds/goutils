@@ -131,17 +131,13 @@ func WrapCustom(str string, wrapLength int, newLineStr string, wrapLongWords boo
 				end := wrapLength + offset
 				index := strings.IndexRune(str[end:len(str)], ' ')
 				if index == -1 {
-					spaceToWrapAt = -1
+					wrappedLine.WriteString(str[offset:len(str)])
+					offset = inputLineLength
 				} else {
 					spaceToWrapAt = index + end
-				}
-				if spaceToWrapAt >= 0 {
 					wrappedLine.WriteString(str[offset:spaceToWrapAt])
 					wrappedLine.WriteString(newLineStr)
 					offset = spaceToWrapAt + 1
-				} else {
-					wrappedLine.WriteString(str[offset:len(str)])
-					offset = inputLineLength
 				}
 			}
 		}
