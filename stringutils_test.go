@@ -307,3 +307,33 @@ func ExampleIndexOfDifference() {
 	// 0
 	// 2
 }
+
+func ExampleDefaultString() {
+
+	out1 := DefaultString("abc", "")
+	out2 := DefaultString("ab", "c")
+	out3 := DefaultString("", "abc")
+
+	fmt.Println(out1)
+	fmt.Println(out2)
+	fmt.Println(out3)
+	// Output:
+	// abc
+	// ab
+	// abc
+}
+
+func ExampleDefaultIfBlank() {
+
+	out1 := DefaultIfBlank("", "abc")
+	out2 := DefaultIfBlank(" ", "abc")
+	out3 := DefaultIfBlank("ab", "cd")
+
+	fmt.Println(out1)
+	fmt.Println(out2)
+	fmt.Println(out3)
+	// Output:
+	// abc
+	// abc
+	// ab
+}
