@@ -1,6 +1,8 @@
 package goutils
 
 import (
+	"regexp"
+	"strconv"
 	"testing"
 	"unicode/utf8"
 )
@@ -73,4 +75,39 @@ func TestCryptoRandomAlphaNumeric(t *testing.T) {
 			t.Errorf("String should be %v characters; string was %v characters", i, len(x))
 		}
 	}
+}
+
+func TestCryptoRandAlphaNumeric_FuzzOnlyNumeric(t *testing.T) {
+
+	// Testing for a reported regression in which some versions produced
+	// a predictably small set of chars.
+	iters := 1000
+	charlen := 0
+	for i := 0; i < 16; i++ {
+		numOnly := 0
+		charlen++
+		for i := 0; i < iters; i++ {
+			out, err := CryptoRandomAlphaNumeric(charlen)
+			println(out)
+			if err != nil {
+				t.Fatal("func failed to produce a random thinger")
+			}
+			if _, err := strconv.Atoi(out); err == nil {
+				numOnly++
+			}
+
+			m, err := regexp.MatchString("^[0-9a-zA-Z]+$", out)
+			if err != nil {
+				t.Fatal(err)
+			}
+			if !m {
+				t.Fatal("Character is not alphanum")
+			}
+		}
+
+		if numOnly == iters {
+			t.Fatalf("Got %d numeric-only random sequences", numOnly)
+		}
+	}
+
 }
