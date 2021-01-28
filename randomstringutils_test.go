@@ -90,7 +90,6 @@ func TestRandAlphaNumeric_FuzzOnlyNumeric(t *testing.T) {
 		charlen++
 		for i := 0; i < iters; i++ {
 			out, err := RandomAlphaNumeric(charlen)
-			println(out)
 			if err != nil {
 				t.Fatal("func failed to produce a random thinger")
 			}

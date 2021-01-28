@@ -98,10 +98,6 @@ Returns:
 	error - an error stemming from an invalid parameter within underlying function, CryptoRandom(...)
 */
 func CryptoRandomAlphaNumeric(count int) (string, error) {
-	if count == 0 {
-		return "", nil
-	}
-
 	return CryptoRandom(count, 0, 0, true, true)
 }
 

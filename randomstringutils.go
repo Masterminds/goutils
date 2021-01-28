@@ -99,13 +99,7 @@ Returns:
 	error - an error stemming from an invalid parameter within underlying function, RandomSeed(...)
 */
 func RandomAlphaNumeric(count int) (string, error) {
-	RandomString, err := Random(count, 0, 0, true, true)
-	if err != nil {
-		return "", fmt.Errorf("Error: %s", err)
-	}
-
-	return RandomString[:count], nil
-
+	return Random(count, 0, 0, true, true)
 }
 
 /*
