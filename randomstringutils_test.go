@@ -3,6 +3,8 @@ package goutils
 import (
 	"fmt"
 	"math/rand"
+	"regexp"
+	"strconv"
 	"testing"
 )
 
@@ -75,4 +77,38 @@ func ExampleRandomSeed() {
 	// 88935
 	// H_I;E
 	// 2b2ca
+}
+
+func TestRandAlphaNumeric_FuzzOnlyNumeric(t *testing.T) {
+
+	// Testing for a reported regression in which some versions produced
+	// a predictably small set of chars.
+	iters := 1000
+	charlen := 0
+	for i := 0; i < 16; i++ {
+		numOnly := 0
+		charlen++
+		for i := 0; i < iters; i++ {
+			out, err := RandomAlphaNumeric(charlen)
+			if err != nil {
+				t.Fatal("func failed to produce a random thinger")
+			}
+			if _, err := strconv.Atoi(out); err == nil {
+				numOnly++
+			}
+
+			m, err := regexp.MatchString("^[0-9a-zA-Z]+$", out)
+			if err != nil {
+				t.Fatal(err)
+			}
+			if !m {
+				t.Fatal("Character is not alphanum")
+			}
+		}
+
+		if numOnly == iters {
+			t.Fatalf("Got %d numeric-only random sequences", numOnly)
+		}
+	}
+
 }
