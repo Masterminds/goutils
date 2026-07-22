@@ -110,17 +110,16 @@ func DeleteWhiteSpace(str string) string {
 	if str == "" {
 		return str
 	}
-	sz := len(str)
 	var chs bytes.Buffer
-	count := 0
-	for i := 0; i < sz; i++ {
-		ch := rune(str[i])
-		if !unicode.IsSpace(ch) {
-			chs.WriteRune(ch)
-			count++
+	changed := false
+	for _, ch := range str {
+		if unicode.IsSpace(ch) {
+			changed = true
+			continue
 		}
+		chs.WriteRune(ch)
 	}
-	if count == sz {
+	if !changed {
 		return str
 	}
 	return chs.String()
@@ -170,12 +169,11 @@ Returns:
     true - if the string is whitespace or empty ("")
 */
 func IsBlank(str string) bool {
-	strLen := len(str)
-	if str == "" || strLen == 0 {
+	if str == "" {
 		return true
 	}
-	for i := 0; i < strLen; i++ {
-		if unicode.IsSpace(rune(str[i])) == false {
+	for _, ch := range str {
+		if !unicode.IsSpace(ch) {
 			return false
 		}
 	}

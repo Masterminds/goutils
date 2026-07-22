@@ -337,3 +337,33 @@ func ExampleDefaultIfBlank() {
 	// abc
 	// ab
 }
+
+func TestIsBlankUnicode(t *testing.T) {
+	// Non-breaking space (U+00A0) is unicode.IsSpace
+	if !IsBlank("\u00a0") {
+		t.Errorf("IsBlank(NBSP) = false, want true")
+	}
+	if !IsBlank(" \t\u00a0\n") {
+		t.Errorf("IsBlank(mixed unicode spaces) = false, want true")
+	}
+	if IsBlank("a\u00a0") {
+		t.Errorf("IsBlank(a+NBSP) = true, want false")
+	}
+}
+
+func TestDeleteWhiteSpaceUnicode(t *testing.T) {
+	// Multi-byte runes must not be split into invalid UTF-8
+	in := "你 好"
+	got := DeleteWhiteSpace(in)
+	want := "你好"
+	if got != want {
+		t.Errorf("DeleteWhiteSpace(%q) = %q, want %q", in, got, want)
+	}
+	// NBSP removed without corrupting surrounding text
+	in = "hello\u00a0world"
+	got = DeleteWhiteSpace(in)
+	want = "helloworld"
+	if got != want {
+		t.Errorf("DeleteWhiteSpace(%q) = %q, want %q", in, got, want)
+	}
+}
