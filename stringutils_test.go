@@ -3,6 +3,7 @@ package goutils
 import (
 	"fmt"
 	"testing"
+	"unicode/utf8"
 )
 
 // ****************************** TESTS ********************************************
@@ -336,4 +337,19 @@ func ExampleDefaultIfBlank() {
 	// abc
 	// abc
 	// ab
+}
+
+func TestAbbreviateMultiByte(t *testing.T) {
+	// Must not slice mid-rune.
+	out, err := Abbreviate("你好世界abcd", 6)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !utf8.ValidString(out) {
+		t.Fatalf("invalid UTF-8: %q", out)
+	}
+	// 3 runes of content + "..." = width 6
+	if out != "你好世..." {
+		t.Fatalf("got %q", out)
+	}
 }

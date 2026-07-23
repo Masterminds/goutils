@@ -72,28 +72,31 @@ func AbbreviateFull(str string, offset int, maxWidth int) (string, error) {
 		err := fmt.Errorf("stringutils illegal argument: Minimum abbreviation width is 4")
 		return "", err
 	}
-	if len(str) <= maxWidth {
+	// Work in runes so multi-byte characters are not sliced mid-codepoint.
+	rs := []rune(str)
+	rlen := len(rs)
+	if rlen <= maxWidth {
 		return str, nil
 	}
-	if offset > len(str) {
-		offset = len(str)
+	if offset > rlen {
+		offset = rlen
 	}
-	if len(str)-offset < (maxWidth - 3) { // 15 - 5 < 10 - 3 =  10 < 7
-		offset = len(str) - (maxWidth - 3)
+	if rlen-offset < (maxWidth - 3) {
+		offset = rlen - (maxWidth - 3)
 	}
 	abrevMarker := "..."
 	if offset <= 4 {
-		return str[0:maxWidth-3] + abrevMarker, nil // str.substring(0, maxWidth - 3) + abrevMarker;
+		return string(rs[0:maxWidth-3]) + abrevMarker, nil
 	}
 	if maxWidth < 7 {
 		err := fmt.Errorf("stringutils illegal argument: Minimum abbreviation width with offset is 7")
 		return "", err
 	}
-	if (offset + maxWidth - 3) < len(str) { // 5 + (10-3) < 15 = 12 < 15
-		abrevStr, _ := Abbreviate(str[offset:len(str)], (maxWidth - 3))
-		return abrevMarker + abrevStr, nil // abrevMarker + abbreviate(str.substring(offset), maxWidth - 3);
+	if (offset + maxWidth - 3) < rlen {
+		abrevStr, _ := Abbreviate(string(rs[offset:]), maxWidth-3)
+		return abrevMarker + abrevStr, nil
 	}
-	return abrevMarker + str[(len(str)-(maxWidth-3)):len(str)], nil // abrevMarker + str.substring(str.length() - (maxWidth - 3));
+	return abrevMarker + string(rs[rlen-(maxWidth-3):]), nil
 }
 
 /*
