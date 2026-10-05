@@ -110,17 +110,16 @@ func DeleteWhiteSpace(str string) string {
 	if str == "" {
 		return str
 	}
-	sz := len(str)
 	var chs bytes.Buffer
-	count := 0
-	for i := 0; i < sz; i++ {
-		ch := rune(str[i])
+	changed := false
+	for _, ch := range str {
 		if !unicode.IsSpace(ch) {
 			chs.WriteRune(ch)
-			count++
+		} else {
+			changed = true
 		}
 	}
-	if count == sz {
+	if !changed {
 		return str
 	}
 	return chs.String()

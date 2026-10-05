@@ -337,3 +337,23 @@ func ExampleDefaultIfBlank() {
 	// abc
 	// ab
 }
+
+func TestDeleteWhiteSpaceUTF8(t *testing.T) {
+	// Multi-byte runes must stay intact (issue #29).
+	str := " 测试 测试 测试 "
+	out := "测试测试测试"
+	if x := DeleteWhiteSpace(str); x != out {
+		t.Errorf("DeleteWhiteSpace(%q) = %q, want %q", str, x, out)
+	}
+	// No whitespace: return the same string unchanged.
+	str = "你好世界"
+	if x := DeleteWhiteSpace(str); x != str {
+		t.Errorf("DeleteWhiteSpace(%q) = %q, want unchanged", str, x)
+	}
+	// NBSP (U+00A0) is unicode.IsSpace and must be removed without corrupting neighbors.
+	str = "a b"
+	out = "ab"
+	if x := DeleteWhiteSpace(str); x != out {
+		t.Errorf("DeleteWhiteSpace(%q) = %q, want %q", str, x, out)
+	}
+}
