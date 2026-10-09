@@ -148,6 +148,46 @@ func TestDeleteWhiteSpace(t *testing.T) {
 	if x := DeleteWhiteSpace(str); x != out {
 		t.Errorf("IndexOf(%v) = %v, want %v", str, x, out)
 	}
+
+	// Test 3
+	str = " 测试 测试 测试 "
+	out = "测试测试测试"
+
+	if x := DeleteWhiteSpace(str); x != out {
+		t.Errorf("DeleteWhiteSpace(%v) = %v, want %v", str, x, out)
+	}
+
+	// Test 4
+	str = "你好世界"
+	out = "你好世界"
+
+	if x := DeleteWhiteSpace(str); x != out {
+		t.Errorf("DeleteWhiteSpace(%v) = %v, want %v", str, x, out)
+	}
+
+	// Test 5
+	str = "　测试　测试　"
+	out = "测试测试"
+
+	if x := DeleteWhiteSpace(str); x != out {
+		t.Errorf("DeleteWhiteSpace(%v) = %v, want %v", str, x, out)
+	}
+
+	// Test 6
+	str = "a\u00a0b"
+	out = "ab"
+
+	if x := DeleteWhiteSpace(str); x != out {
+		t.Errorf("DeleteWhiteSpace(%v) = %v, want %v", str, x, out)
+	}
+
+	// Test 7
+	str = "\t测 试\n1 2\r"
+	out = "测试12"
+
+	if x := DeleteWhiteSpace(str); x != out {
+		t.Errorf("DeleteWhiteSpace(%v) = %v, want %v", str, x, out)
+	}
 }
 
 func TestIndexOfDifference(t *testing.T) {
