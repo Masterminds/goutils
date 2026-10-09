@@ -69,7 +69,24 @@ Returns:
 	error - an error stemming from an invalid parameter within underlying function, RandomSeed(...)
 */
 func RandomNumeric(count int) (string, error) {
-	return Random(count, 0, 0, false, true)
+	if count == 0 {
+		return "", nil
+	} else if count < 0 {
+		return "", fmt.Errorf("randomstringutils illegal argument: Requested random string length %v is less than 0.", count)
+	}
+
+	firstDigit, err := Random(1, '1', '9'+1, false, false)
+	if err != nil {
+		return "", err
+	}
+	if count == 1 {
+		return firstDigit, nil
+	}
+	rest, err := Random(count-1, 0, 0, false, true)
+	if err != nil {
+		return "", err
+	}
+	return firstDigit + rest, nil
 }
 
 /*
