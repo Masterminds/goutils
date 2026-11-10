@@ -20,12 +20,15 @@ import (
 	"fmt"
 	"math"
 	"math/rand"
+	"sync"
 	"time"
 	"unicode"
 )
 
 // RANDOM provides the time-based seed used to generate random numbers
 var RANDOM = rand.New(rand.NewSource(time.Now().UnixNano()))
+
+var randomMutex sync.Mutex
 
 /*
 RandomNonAlphaNumeric creates a random string whose length is the number of characters specified.
@@ -137,6 +140,8 @@ Returns:
 	error - an error stemming from an invalid parameter within underlying function, RandomSeed(...)
 */
 func Random(count int, start int, end int, letters bool, numbers bool, chars ...rune) (string, error) {
+	randomMutex.Lock()
+	defer randomMutex.Unlock()
 	return RandomSeed(count, start, end, letters, numbers, chars, RANDOM)
 }
 
