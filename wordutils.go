@@ -51,6 +51,7 @@ import (
 	"bytes"
 	"strings"
 	"unicode"
+	"unicode/utf8"
 )
 
 // VERSION indicates the current version of goutils
@@ -97,46 +98,54 @@ func WrapCustom(str string, wrapLength int, newLineStr string, wrapLongWords boo
 		wrapLength = 1
 	}
 
-	inputLineLength := len(str)
+	remaining := utf8.RuneCountInString(str)
 	offset := 0
 
 	var wrappedLine bytes.Buffer
 
-	for inputLineLength-offset > wrapLength {
+	for remaining > wrapLength {
 
 		if rune(str[offset]) == ' ' {
 			offset++
+			remaining--
 			continue
 		}
 
-		end := wrapLength + offset + 1
-		spaceToWrapAt := strings.LastIndex(str[offset:end], " ") + offset
+		end := offset
+		for i := 0; i < wrapLength; i++ {
+			_, size := utf8.DecodeRuneInString(str[end:])
+			end += size
+		}
+		// Include a space immediately after the last column, if present.
+		spaceToWrapAt := strings.LastIndex(str[offset:end+1], " ") + offset
 
 		if spaceToWrapAt >= offset {
 			// normal word (not longer than wrapLength)
 			wrappedLine.WriteString(str[offset:spaceToWrapAt])
 			wrappedLine.WriteString(newLineStr)
+			remaining -= utf8.RuneCountInString(str[offset : spaceToWrapAt+1])
 			offset = spaceToWrapAt + 1
 
 		} else {
 			// long word or URL
 			if wrapLongWords {
-				end := wrapLength + offset
 				// long words are wrapped one line at a time
 				wrappedLine.WriteString(str[offset:end])
 				wrappedLine.WriteString(newLineStr)
-				offset += wrapLength
+				offset = end
+				remaining -= wrapLength
 			} else {
 				// long words aren't wrapped, just extended beyond limit
-				end := wrapLength + offset
 				index := strings.IndexRune(str[end:len(str)], ' ')
 				if index == -1 {
 					wrappedLine.WriteString(str[offset:len(str)])
-					offset = inputLineLength
+					offset = len(str)
+					remaining = 0
 				} else {
 					spaceToWrapAt = index + end
 					wrappedLine.WriteString(str[offset:spaceToWrapAt])
 					wrappedLine.WriteString(newLineStr)
+					remaining -= utf8.RuneCountInString(str[offset : spaceToWrapAt+1])
 					offset = spaceToWrapAt + 1
 				}
 			}
