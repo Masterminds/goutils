@@ -327,12 +327,9 @@ func Initials(str string, delimiters ...rune) string {
 	if delimiters != nil && len(delimiters) == 0 {
 		return ""
 	}
-	strLen := len(str)
 	var buf bytes.Buffer
 	lastWasGap := true
-	for i := 0; i < strLen; i++ {
-		ch := rune(str[i])
-
+	for _, ch := range str {
 		if isDelimiter(ch, delimiters...) {
 			lastWasGap = true
 		} else if lastWasGap {
