@@ -189,6 +189,28 @@ func TestInitials(t *testing.T) {
 
 }
 
+func TestInitialsUnicode(t *testing.T) {
+	tests := []struct {
+		input      string
+		delimiters []rune
+		want       string
+	}{
+		{"Émile Zola", nil, "ÉZ"},
+		{"Иван Петров", nil, "ИП"},
+		{"张 三", nil, "张三"},
+		{"😀 smile", nil, "😀s"},
+		{"\u2003Émile\u00a0Zola\u3000", nil, "ÉZ"},
+		{"Jean・Luc・Picard", []rune{'・'}, "JLP"},
+		{"Émile Zola", []rune{}, ""},
+		{"\u2003\u00a0\u3000", nil, ""},
+	}
+	for _, test := range tests {
+		if got := Initials(test.input, test.delimiters...); got != test.want {
+			t.Errorf("Initials(%q, %q) = %q, want %q", test.input, string(test.delimiters), got, test.want)
+		}
+	}
+}
+
 // ****************************** EXAMPLES ********************************************
 
 func ExampleWrap() {
